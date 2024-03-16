@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Thêm liên hệ</h1>
-        <contact-form @submit:contact="submitContact" :contact="newContact" />
+        <ContactForm :contact="newContact" @submit:contact="createContact" />
     </div>
 </template>
 
@@ -11,7 +11,7 @@ import ContactService from "@/services/contact.service";
 
 export default {
     components: {
-        ContactForm
+        ContactForm,
     },
     data() {
         return {
@@ -25,10 +25,10 @@ export default {
         };
     },
     methods: {
-        async submitContact(contactData) {
+        async createContact(data) {
             try {
-                await ContactService.create(contactData);
-                alert("Thêm thành công!.");
+                await ContactService.create(data);
+                alert("Thêm thành công!");
                 this.$router.push({ name: "contactbook" });
             } catch (error) {
                 console.error(error);
